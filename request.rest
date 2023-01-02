@@ -1,0 +1,106 @@
+@local = http://localhost:8080
+@contentType = application/json
+@baseUrl = {{local}}
+
+
+############################
+# 			AUTH
+############################
+# @name signup
+POST {{ baseUrl }}/api/auth/signup
+Content-Type: {{contentType}}
+
+{
+	"username": "paul",
+	"email": "paul@gmail.com",
+	"password": "12345678"
+}
+
+###
+# @name signin
+POST {{ baseUrl }}/api/auth/signin
+Content-Type: {{contentType}}
+
+{
+	"username": "paul",
+	"password": "12345678"
+}
+
+###
+@authToken = {{signin.response.body.accessToken}}
+
+
+############################
+# 			USER
+############################
+
+### tes access with token
+GET {{ baseUrl }}/api/test/user
+x-access-token: {{ authToken }} 
+
+
+############################
+# 			BLOG
+############################
+
+### list blog
+GET {{ baseUrl }}/blogs/published?page=1
+
+
+### detail blog
+GET {{ baseUrl }}/blogs/1
+
+### create blog
+POST {{ baseUrl }}/blogs
+Content-Type: {{contentType}}
+
+{
+	"title": "Judul keempat dari API",
+	"text": "lorem ipsum dolor sit amet",
+	"published": true
+}
+
+### update blog
+PUT {{ baseUrl }}/blogs/1
+Content-Type: {{contentType}}
+
+{
+	"title": "Judul keempat dari API diedit",
+	"text": "lorem ipsum dolor sit amet",
+	"published": true
+}
+
+### delete blog
+DELETE  {{ baseUrl }}/blogs/1
+
+
+############################
+# 		CATEGORY
+############################
+### list category
+GET {{ baseUrl }}/categories
+
+
+### detail category
+GET {{ baseUrl }}/categories/1
+
+### create category
+POST {{ baseUrl }}/categories
+Content-Type: {{contentType}}
+
+{
+	"name": "makanane enak tenan"
+}
+
+### update category
+PUT {{ baseUrl }}/categories/1
+Content-Type: {{contentType}}
+x-access-token: {{ authToken }} 
+
+{
+	"name": "Makanan jos paling uwawe"
+}
+
+### delete category
+DELETE  {{ baseUrl }}/categories/1
+x-access-token: {{ authToken }} 
