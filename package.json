@@ -16,12 +16,16 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.28.0",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "swagger-ui-express": "^4.6.0"
   },
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
     "semi": false,
     "singleQuote": true
+  },
+  "devDependencies": {
+    "@types/swagger-ui-express": "^4.1.3"
   }
 }

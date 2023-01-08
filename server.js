@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const swaggerUi = require('swagger-ui-express')
+const { apiDocumentation } = require('./docs/apiDoc')
 
 const app = express()
 
@@ -14,6 +16,7 @@ app.use(
     extended: true,
   })
 )
+app.use('/documentation', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
 
 const db = require('./app/models')
 db.sequelize
